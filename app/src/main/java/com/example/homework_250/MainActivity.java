@@ -78,9 +78,10 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add(input2);
 
         HashMap<String, String> input3 = new HashMap<>();
-        input3.put("title", "Title 1");
-        input3.put("description", "Description 1");
+        input3.put("title", "India slammed in new US report on religious freedom");
+        input3.put("description", "Religious Freedom Report provides blistering account of violence perpetuated against Muslims and Christians in India");
         input3.put("jsonUrl", "http://192.168.0.103/Class%20250/PHP_3.php");
+        input3.put("image", "http://192.168.0.103/Class%20250/Images/India.jpg");
         arrayList.add(input3);
 
         HashMap<String, String> input4 = new HashMap<>();
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(new Intent(MainActivity.this, DataResponse.class));
 
-                Toast.makeText(MainActivity.this, titleItem + " has been Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, titleItem + " has been Clicked", Toast.LENGTH_SHORT).show();
 
             });
 
