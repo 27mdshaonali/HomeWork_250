@@ -29,7 +29,6 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:textIsSelectable="true"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,6 +39,7 @@
                 android:text="title"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textIsSelectable="true"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
@@ -77,6 +77,14 @@
 
         </ScrollView>
 
+        <LinearLayout
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:id="@+id/adContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical" />
 
     </RelativeLayout>
 </RelativeLayout>

@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +21,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.homework_250.bannerad.Admob;
+import com.example.homework_250.bannerad.Constant;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,8 +31,9 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
-//    HashMap<String, String> hashMap = new HashMap<>();
+    //    HashMap<String, String> hashMap = new HashMap<>();
     ListView listView;
+    LinearLayout adContainer;
 //    TextView textView;
 
     @Override
@@ -52,12 +54,26 @@ public class MainActivity extends AppCompatActivity {
 
         populateListView();
 
+        loadAd();
+
+
     }
 
     public void initialize() {
 
         listView = findViewById(R.id.listView);
+        adContainer = findViewById(R.id.adContainer);
 //        textView = findViewById(R.id.ServerResponse);
+
+    }
+
+    public void loadAd() {
+
+        // Initialize the Google Mobile Ads SDK on a background thread.
+        Admob.sdkInitialize(this);
+
+        // Set up the banner ad view.
+        Admob.setBanner(adContainer, this);
 
     }
 

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,11 +14,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.homework_250.bannerad.Admob;
 
 public class DataResponse extends AppCompatActivity {
 
@@ -49,9 +52,15 @@ public class DataResponse extends AppCompatActivity {
         resultData = findViewById(R.id.resultData);
         titleTV = findViewById(R.id.title);
         imageView = findViewById(R.id.imageView);
+        resultData.setVisibility(View.GONE);
+        LinearLayout adContainer = findViewById(R.id.adContainer);
 
         titleTV.setText(TITLE);
         imageView.setImageBitmap(IMAGE_BITMAP);
+
+        // Initialize the Google Mobile Ads SDK on a background thread.
+        Admob.sdkInitialize(this);
+        Admob.setBanner(adContainer, this);
 
 
     }
@@ -61,7 +70,7 @@ public class DataResponse extends AppCompatActivity {
 
         resultData.setVisibility(View.VISIBLE);
 
-        StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, JSON_URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
