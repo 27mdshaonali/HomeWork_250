@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadAd() {
 
-        // Initialize the Google Mobile Ads SDK on a background thread.
-        Admob.sdkInitialize(this);
-
-        // Set up the banner ad view.
-        Admob.setBanner(adContainer, this);
+//        // Initialize the Google Mobile Ads SDK on a background thread.
+//        Admob.sdkInitialize(this);
+//
+//        // Set up the banner ad view.
+//        Admob.setBanner(adContainer, this);
 
     }
 

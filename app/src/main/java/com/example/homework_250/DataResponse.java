@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.homework_250.bannerad.Admob;
+import com.example.homework_250.bannerad.Constant;
 
 public class DataResponse extends AppCompatActivity {
 
@@ -40,12 +41,10 @@ public class DataResponse extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         initialize();
         volleyResponse();
-
-
-    } //======================== OnCreate Method End ========================
-
+    }
 
     //======================== Initialize Method ========================
     public void initialize() {
@@ -58,38 +57,47 @@ public class DataResponse extends AppCompatActivity {
         titleTV.setText(TITLE);
         imageView.setImageBitmap(IMAGE_BITMAP);
 
-        // Initialize the Google Mobile Ads SDK on a background thread.
-        Admob.sdkInitialize(this);
-        Admob.setBanner(adContainer, this);
-
-
+        // Initialize the Google Mobile Ads SDK and set up the banner ad
+        Admob.sdkInitialize(this, new Constant.AdStatusCallback() {
+            @Override
+            public void onAdStatusFetched(boolean isAdEnabled) {
+                if (isAdEnabled) {
+                    // Set up the banner ad
+                    Admob.setBanner(adContainer, DataResponse.this, new Constant.AdStatusCallback() {
+                        @Override
+                        public void onAdStatusFetched(boolean isAdEnabled) {
+                            if (isAdEnabled) {
+                                // Banner ad setup is complete
+                            } else {
+                                // Ads are disabled, handle accordingly
+                            }
+                        }
+                    });
+                } else {
+                    // Ads are disabled, handle accordingly
+                }
+            }
+        });
     }
 
     //======================== Volley Response Method ========================
     public void volleyResponse() {
-
         resultData.setVisibility(View.VISIBLE);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 resultData.setText(response);
-
             }
         }, new Response.ErrorListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 resultData.setText("Error");
-
             }
         });
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
-
     }
-
 }
